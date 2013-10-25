@@ -31,8 +31,8 @@ def parse_pairs(fn):
 
 import string
 charmap = {}
-charmap.update(zip(string.ascii_lowercase, string.ascii_lowercase))
-charmap.update(zip(string.ascii_uppercase, string.ascii_lowercase))
+charmap.update(list(zip(string.ascii_lowercase, string.ascii_lowercase)))
+charmap.update(list(zip(string.ascii_uppercase, string.ascii_lowercase)))
 charmap[' '] = '-'
 for k in '()':
     charmap[k] = ''
@@ -41,7 +41,7 @@ def get_anchor(s):
     # IndexErrors are expected to test for what else include in the map
     try:
         return "".join(map(charmap.__getitem__, s))
-    except KeyError, e:
+    except KeyError as e:
         sys.stderr.write('Unexpected char while getting anchor for %r: %s\n'
                          % (s, e))
         sys.exit(-1)
@@ -49,5 +49,5 @@ def get_anchor(s):
 if __name__ == '__main__':
     for fn in sys.argv[1:]:
         for dir in parse_pairs(fn):
-            print dir
+            print(dir)
 
