@@ -18,7 +18,8 @@ DOCTESTS = $(wildcard src/epydoc/test/*.doctest)
 MANUAL_SRC = $(wildcard doc/manual-*.txt)
 
 # What version of python to use?
-PYTHON = python2.5
+PYTHON = env python
+PYTHON_SITE_PACKAGES = $(shell $(PYTHON) -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")
 export PYTHONPATH=src/
 
 # The location of the webpage.
@@ -296,7 +297,7 @@ docutils-html: .docutils-html.up2date
 	mkdir -p $(HTML)/docutils
 	$(EPYDOC) -o $(HTML)/docutils -n 'Docutils' --html --debug \
 	        --docformat plaintext --ignore-param-mismatch \
-	        --include-log /usr/lib/python2.3/site-packages/docutils
+	        --include-log $(PYTHON_SITE_PACKAGES)/docutils
 	touch .docutils-html.up2date
 
 docutils-pdf: .docutils-pdf.up2date
@@ -305,7 +306,7 @@ docutils-pdf: .docutils-pdf.up2date
 	mkdir -p $(LATEX)/docutils
 	$(EPYDOC) -o $(LATEX)/docutils -n 'Docutils' --pdf --debug \
 	        --docformat plaintext --ignore-param-mismatch \
-	        /usr/lib/python2.3/site-packages/docutils
+	        $(PYTHON_SITE_PACKAGES)/docutils
 	touch .docutils-pdf.up2date
 
 
