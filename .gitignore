@@ -1,0 +1,20 @@
+
+#python cache files
+__pycache__
+*.pyc
+
+#ide
+.idea
+
+#built binaries
+.*.up2date
+api
+epydoc.notes
+etc
+examples
+html
+latex
+lists.txt
+profile.stdlib
+stdlib
+webpage
